@@ -32,8 +32,8 @@ class SourceParser
       # ... and there is an extra 'vevent' class
       content.gsub!(/(class="event-title") class="vevent"/, '\1')
 
-      something = hCalendar.find(:text => content)
-      return(something.is_a?(hCalendar) ? [something] : something)
+      something = HCalendar.find(:text => content)
+      return(something.is_a?(HCalendar) ? [something] : something)
     end
 
     ABSTRACT_EVENT_TO_HCALENDAR_FIELD_MAP = {
