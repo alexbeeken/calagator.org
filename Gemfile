@@ -11,14 +11,6 @@
 
 source 'https://rubygems.org'
 
-unless defined?($BUNDLER_INTERPRETER_CHECKED)
-  if defined?(JRUBY_VERSION)
-    puts "WARNING: JRuby cannot run Calagator. Its version of Nokogiri is incompatible with 'loofah', 'mofo' and other things. Although basic things like running the console and starting the server work, you'll run into problems as soon as you try to add/edit records or import hCalendar events."
-    $JRUBY_WARNED = true
-  end
-  $BUNDLER_INTERPRETER_CHECKED = true
-end
-
 basedir = File.dirname(__FILE__)
 
 # Database driver
@@ -75,9 +67,6 @@ platform :jruby do
   gem 'jruby-openssl'
   gem 'jruby-rack'
   gem 'warbler'
-
-  gem 'activerecord-jdbcsqlite3-adapter'
-  gem 'jdbc-sqlite3'
 end
 
 # Some dependencies are only needed for test and development environments. On
