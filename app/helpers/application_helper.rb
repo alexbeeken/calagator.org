@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    BlueCloth.new(text, :relaxed => true).to_html
+    Kramdown::Document.new(text).to_html.strip
   end
 
   # Return a HTML string with the BR tags converted to XHTML compliant markup.
