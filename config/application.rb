@@ -34,6 +34,7 @@ module Calagator
     ### libraries
     require 'metaclass'
     require 'tag_model_extensions'
+    require "loofah/helpers"
     ### monkeypatches
     require 'ext/nil_strip_html'
     require 'ext/object_logit'
