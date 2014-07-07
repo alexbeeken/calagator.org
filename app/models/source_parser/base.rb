@@ -1,3 +1,5 @@
+require 'metaclass'
+
 $SourceParserImplementations = []
 
 class SourceParser
