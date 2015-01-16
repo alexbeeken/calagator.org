@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'sprockets/railtie'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -26,8 +28,8 @@ module Calagator
     config.active_record.observers = :cache_observer
 
     # Deliver email using sendmail by default
-    config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.sendmail_settings = { :arguments => '-i' }
+    # config.action_mailer.delivery_method = :sendmail
+    # config.action_mailer.sendmail_settings = { :arguments => '-i' }
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
