@@ -13,11 +13,7 @@ end
 
 module Calagator
   class Application < Rails::Application
-    config.autoload_paths += %W(
-      #{config.root}/app/mixins
-      #{config.root}/app/observers
-      #{config.root}/lib
-    )
+    config.autoload_paths += %W( #{config.root}/lib )
 
     # Activate observers that should always be running
     # config.active_record.observers = :cacher, :garbage_collector
