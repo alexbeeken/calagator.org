@@ -56,14 +56,17 @@ module MappingHelper
 
           var venueIcon = L.AwesomeMarkers.icon({
             icon: 'star',
-            color: '#{SECRETS.mapping['marker_color']}'
+            color: '#{marker_color}'
           })
 
-          var markers = [#{markers.join(", ")}];
+          var markers = [#{markers}];
           var markerGroup = L.featureGroup(markers);
           markerGroup.addTo(map);
+
+          if(#{should_fit_bounds}) {
+            map.fitBounds(markerGroup.getBounds());
+          }
         JS
-        script << "map.fitBounds(markerGroup.getBounds());" if should_fit_bounds
 
         map_div + context.javascript_tag(script)
       end
@@ -103,7 +106,11 @@ module MappingHelper
 
           "L.marker([#{latitude}, #{longitude}], {title: '#{context.j title}', icon: venueIcon}).bindPopup('#{context.j popup}')"
         end
-      }.compact
+      }.compact.join(", ")
+    end
+
+    def marker_color
+      SECRETS.mapping['marker_color']
     end
 
     def locatable_items
