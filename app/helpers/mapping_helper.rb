@@ -113,6 +113,4 @@ module MappingHelper
       (SECRETS.mapping && SECRETS.mapping["tiles"]) || 'terrain'
     end
   end
-
-  alias_method :google_map, :map
 end
