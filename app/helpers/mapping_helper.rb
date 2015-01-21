@@ -58,7 +58,11 @@ module MappingHelper
           color: '#{marker_color}'
         })
 
-        var markers = [#{markers}];
+        var markers = [
+          #{markers.map do |m|
+            "L.marker([#{m.latitude}, #{m.longitude}], {title: '#{context.j m.title}', icon: venueIcon}).bindPopup('#{context.j m.popup}')"
+          end.join(",\n") }
+        ];
         var markerGroup = L.featureGroup(markers);
         markerGroup.addTo(map);
 
@@ -102,9 +106,9 @@ module MappingHelper
           title = locatable_item.title
           popup = context.link_to(locatable_item.title, locatable_item)
 
-          "L.marker([#{latitude}, #{longitude}], {title: '#{context.j title}', icon: venueIcon}).bindPopup('#{context.j popup}')"
+          Marker.new(latitude, longitude, title, popup)
         end
-      }.compact.join(", ")
+      }.compact
     end
 
     def marker_color
@@ -129,6 +133,9 @@ module MappingHelper
     def map_tiles
       (SECRETS.mapping && SECRETS.mapping["tiles"]) || 'terrain'
     end
+  end
+
+  class Marker < Struct.new(:latitude, :longitude, :title, :popup)
   end
 
   alias_method :google_map, :map
